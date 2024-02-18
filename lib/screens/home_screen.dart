@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: MediaQuery.sizeOf(context).height - 290,
           width: MediaQuery.sizeOf(context).width,
           decoration: BoxDecoration(
-              color: const Color.fromRGBO(244, 245, 255, 1),
+              color: const Color.fromRGBO(242, 244, 255, 1),
               borderRadius: BorderRadius.circular(16)),
           child: Column(
             children: [WarningCard()],

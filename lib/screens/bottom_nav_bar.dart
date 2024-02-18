@@ -14,28 +14,44 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentPageIndex = index;
-            });
-          },
-          selectedIndex: currentPageIndex,
-          destinations: const <Widget>[
-            NavigationDestination(
-              selectedIcon: Icon(Icons.home),
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.2),
+              blurRadius: 6,
             ),
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.history,
-                color: Color.fromRGBO(244, 245, 255, 1),
+          ],
+        ),
+        child: NavigationBar(
+            shadowColor: Color.fromRGBO(0, 0, 0, 0.2),
+            backgroundColor: Colors.white,
+            indicatorColor: Color.fromRGBO(173, 6, 6, 1),
+            onDestinationSelected: (int index) {
+              setState(() {
+                currentPageIndex = index;
+              });
+            },
+            selectedIndex: currentPageIndex,
+            destinations: const <Widget>[
+              NavigationDestination(
+                selectedIcon: Icon(
+                  Icons.home,
+                  color: Colors.white,
+                ),
+                icon: Icon(Icons.home_outlined),
+                label: 'Home',
               ),
-              icon: Icon(Icons.history),
-              label: 'History',
-            )
-          ]),
+              NavigationDestination(
+                selectedIcon: Icon(
+                  Icons.history,
+                  color: Colors.white,
+                ),
+                icon: Icon(Icons.history),
+                label: 'History',
+              )
+            ]),
+      ),
       body: <Widget>[
         const HomeScreen(),
         const HistoryScreen(),
