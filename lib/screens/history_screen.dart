@@ -13,12 +13,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: Container(
+          padding: EdgeInsets.only(top: 30.0),
           height: MediaQuery.sizeOf(context).height - 290,
           width: MediaQuery.sizeOf(context).width,
           decoration: BoxDecoration(
               color: const Color.fromRGBO(244, 245, 255, 1),
               borderRadius: BorderRadius.circular(16)),
-          child: Row(
+          child: Column(
             children: [],
           )),
       body: Container(
