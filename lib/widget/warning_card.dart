@@ -60,61 +60,64 @@ class _WarningCardState extends State<WarningCard> {
                   children: [
                     Row(
                       children: [
-                        Container(
-                          width: 10.0,
-                          height: 10.0,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color.fromRGBO(29, 29, 29, 1),
-                              border:
-                                  Border.all(color: Colors.white, width: 1.5)),
-                        ),
-                        SizedBox(
-                          width: 8.0,
-                        ),
-                        Text("Tertunda", style: TextStyle(color: Colors.white))
-                      ],
-                    ),
-                    SizedBox(
-                      width: 12.0,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          width: 10.0,
-                          height: 10.0,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color.fromRGBO(223, 170, 33, 1),
-                              border:
-                                  Border.all(color: Colors.white, width: 1.5)),
+                        Icon(
+                          Icons.local_fire_department_sharp,
+                          color: Colors.red,
                         ),
                         SizedBox(
                           width: 8.0,
                         ),
                         Text(
-                          "Sedang",
-                          style: TextStyle(color: Colors.white),
+                          "Tinggi",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         )
                       ],
                     )
                   ],
                 ),
-                SizedBox(
-                  width: 120.0,
-                  height: 35.0,
-                  child: ElevatedButton(
-                      onPressed: () => {},
-                      child: Text(
-                        "Buka Peta",
-                        style: TextStyle(color: Color.fromRGBO(173, 6, 6, 1)),
-                      ),
-                      style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 90.0,
+                      height: 35.0,
+                      child: ElevatedButton(
+                          onPressed: () => {},
+                          child: Text(
+                            "Selesai",
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.green[700]),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(2),
-                      )))),
+                                borderRadius: BorderRadius.circular(2),
+                              )))),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    SizedBox(
+                      width: 90.0,
+                      height: 35.0,
+                      child: ElevatedButton(
+                          onPressed: () => {},
+                          child: Text(
+                            "Lokasi",
+                            style: TextStyle(
+                                color: Color.fromRGBO(173, 6, 6, 1),
+                                fontSize: 12),
+                          ),
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(2),
+                          )))),
+                    ),
+                  ],
                 )
               ],
             )
