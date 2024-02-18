@@ -1,4 +1,5 @@
 import 'package:firemate/screens/history_screen.dart';
+import 'package:firemate/widget/warning_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: const Color.fromRGBO(244, 245, 255, 1),
               borderRadius: BorderRadius.circular(16)),
           child: Row(
-            children: [],
+            children: [WarningCard()],
           )),
       bottomNavigationBar: NavigationBar(
           onDestinationSelected: (int index) {
