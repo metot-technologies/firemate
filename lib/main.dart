@@ -1,5 +1,4 @@
 import 'package:firemate/screens/bottom_nav_bar.dart';
-import 'package:firemate/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

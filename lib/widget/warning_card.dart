@@ -13,8 +13,7 @@ class _WarningCardState extends State<WarningCard> {
     return Card(
       child: Container(
         width: MediaQuery.sizeOf(context).width - 24,
-        height: 152.0,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
             image: const DecorationImage(

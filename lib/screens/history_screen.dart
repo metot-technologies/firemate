@@ -1,3 +1,4 @@
+import 'package:firemate/widget/history_card.dart';
 import 'package:flutter/material.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
               color: const Color.fromRGBO(244, 245, 255, 1),
               borderRadius: BorderRadius.circular(16)),
           child: Column(
-            children: [],
+            children: [HistoryCard()],
           )),
       body: Container(
         width: MediaQuery.sizeOf(context).width,
