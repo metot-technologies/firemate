@@ -1,6 +1,9 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firemate/model/data_model.dart';
 import 'package:flutter/material.dart';
+
+import '../controllers/notification_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,6 +19,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    AwesomeNotifications().setListeners(
+        onActionReceivedMethod: NotificationController.onActionReceivedMethod,
+        onNotificationCreatedMethod:
+        NotificationController.onNotificationCreatedMethod,
+        onNotificationDisplayedMethod:
+        NotificationController.onNotificationDisplayedMethod,
+        onDismissActionReceivedMethod:
+        NotificationController.onDismissActionReceivedMethod);
     super.initState();
 
     retrieveFireData();
@@ -73,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Fire fire = Fire(key: data.snapshot.key, fireData: fireData);
       fireList.add(fire);
       setState(() {});
+      AwesomeNotifications().createNotification(content: NotificationContent(id: 1, channelKey: "basic_channel", title: "Firemate", body: "TERJADI KEBAKARAN!"));
     });
   }
 
