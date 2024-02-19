@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "446733698449",
+    "firebase_url": "https://esp8266-f20ed-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "esp8266-f20ed",
+    "storage_bucket": "esp8266-f20ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446733698449:android:9d0cf779d25db62a054630",
+        "android_client_info": {
+          "package_name": "com.example.firemate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446733698449-fiuf8eg2r5onqfj34pm6cjenlga359d8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALUGhM7MPnqTuIJZXWHpMXrK_84ihJrfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446733698449-fiuf8eg2r5onqfj34pm6cjenlga359d8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
