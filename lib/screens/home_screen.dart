@@ -1,6 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firemate/model/data_model.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -74,6 +76,15 @@ class _HomeScreenState extends State<HomeScreen> {
       fireList.add(fire);
       setState(() {});
     });
+  }
+
+  static void navigateTo(double lat, double lon) async {
+    var uri = Uri.parse('https://www.google.com/maps/dir/?api=1&destination=$lat,$lon&travelmode=driving');
+    if (await canLaunchUrlString(uri.toString())) {
+      await launchUrlString(uri.toString());
+    } else {
+      throw 'Could not launch ${uri.toString()}';
+    }
   }
 
   Widget WarningCard(Fire fireList) {
@@ -171,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 90.0,
                       height: 35.0,
                       child: ElevatedButton(
-                          onPressed: () => {},
+                          onPressed: () => { navigateTo(-8.68967, 115.23786)},
                           child: Text(
                             "Lokasi",
                             style: TextStyle(
