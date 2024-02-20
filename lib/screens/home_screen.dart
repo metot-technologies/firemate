@@ -144,12 +144,10 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 12.0,
             ),
             Text(
-              "Terjadi kebakaran pada ${DateFormat().add_Hm().format(
+              "Terjadi kebakaran pada ${DateFormat('HH:mm WITA, d MMMM y', 'id_ID').format(
                       DateTime.fromMillisecondsSinceEpoch(
                               fireList.fireData!.time! * 1000)
-                          .toUtc())} WITA, ${DateFormat().add_yMMMMd().format(
-                      DateTime.fromMillisecondsSinceEpoch(
-                          fireList.fireData!.time! * 1000))}. Buka peta untuk mengetahui lokasi!",
+                          .toUtc())}. Buka peta untuk mengetahui lokasi!",
               style: const TextStyle(color: Colors.white, fontSize: 12.0),
             ),
             const SizedBox(
