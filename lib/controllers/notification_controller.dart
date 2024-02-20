@@ -1,4 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firemate/main.dart';
+import 'package:firemate/screens/home_screen.dart';
+import 'package:flutter/material.dart';
 
 class NotificationController {
   /// Use this method to detect when a new notification or a schedule is created
@@ -18,5 +21,9 @@ class NotificationController {
   /// Use this method to detect when the user taps on a notification or action button
   @pragma("vm:entry-point")
   static Future<void> onActionReceivedMethod(
-      ReceivedAction receivedAction) async {}
+      ReceivedAction receivedAction) async {
+    MaterialPageRoute(
+      builder: (_) => const HomeScreen()
+    );
+  }
 }
