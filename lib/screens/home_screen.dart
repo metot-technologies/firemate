@@ -2,7 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firemate/model/data_model.dart';
 import 'package:flutter/material.dart';
-
+import 'package:url_launcher/url_launcher_string.dart';
 import '../controllers/notification_controller.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,11 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
     AwesomeNotifications().setListeners(
         onActionReceivedMethod: NotificationController.onActionReceivedMethod,
         onNotificationCreatedMethod:
-        NotificationController.onNotificationCreatedMethod,
+            NotificationController.onNotificationCreatedMethod,
         onNotificationDisplayedMethod:
-        NotificationController.onNotificationDisplayedMethod,
+            NotificationController.onNotificationDisplayedMethod,
         onDismissActionReceivedMethod:
-        NotificationController.onDismissActionReceivedMethod);
+            NotificationController.onDismissActionReceivedMethod);
     super.initState();
 
     retrieveFireData();
@@ -45,8 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                for (int i = 0; i < fireList.length; i++) 
-                    WarningCard(fireList[i])
+                for (int i = 0; i < fireList.length; i++)
+                  WarningCard(fireList[i])
               ],
             ),
           )),
@@ -85,9 +85,25 @@ class _HomeScreenState extends State<HomeScreen> {
       FireData fireData = FireData.fromJson(data.snapshot.value as Map);
       Fire fire = Fire(key: data.snapshot.key, fireData: fireData);
       fireList.add(fire);
-      setState(() {});
-      AwesomeNotifications().createNotification(content: NotificationContent(id: 1, channelKey: "basic_channel", title: "Firemate", body: "TERJADI KEBAKARAN!"));
+      setState(() {
+        AwesomeNotifications().createNotification(
+            content: NotificationContent(
+                id: 1,
+                channelKey: "basic_channel",
+                title: "Firemate",
+                body: "TERJADI KEBAKARAN!"));
+      });
     });
+  }
+
+  static void navigateTo(double lat, double lon) async {
+    var uri = Uri.parse(
+        'https://www.google.com/maps/dir/?api=1&destination=$lat,$lon&travelmode=driving');
+    if (await canLaunchUrlString(uri.toString())) {
+      await launchUrlString(uri.toString());
+    } else {
+      throw 'Could not launch ${uri.toString()}';
+    }
   }
 
   Widget WarningCard(Fire fireList) {
@@ -185,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 90.0,
                       height: 35.0,
                       child: ElevatedButton(
-                          onPressed: () => {},
+                          onPressed: () => {navigateTo(-8.68967, 115.23786)},
                           child: Text(
                             "Lokasi",
                             style: TextStyle(
