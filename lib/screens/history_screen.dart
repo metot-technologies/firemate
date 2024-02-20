@@ -20,7 +20,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           decoration: BoxDecoration(
               color: const Color.fromRGBO(242, 244, 255, 1),
               borderRadius: BorderRadius.circular(16)),
-          child: Column(
+          child: const Column(
             children: [HistoryCard()],
           )),
       body: Container(

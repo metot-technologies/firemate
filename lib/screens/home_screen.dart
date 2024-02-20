@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
+            const Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -140,23 +140,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 12.0,
             ),
             Text(
-              "Terjadi kebakaran pada " +
-                  DateFormat().add_Hm().format(
+              "Terjadi kebakaran pada ${DateFormat().add_Hm().format(
                       DateTime.fromMillisecondsSinceEpoch(
                               fireList.fireData!.time! * 1000)
-                          .toUtc()) +
-                  " WITA, " +
-                  DateFormat().add_yMMMMd().format(
+                          .toUtc())} WITA, ${DateFormat().add_yMMMMd().format(
                       DateTime.fromMillisecondsSinceEpoch(
-                          fireList.fireData!.time! * 1000)) +
-                  ". Buka peta untuk mengetahui lokasi!",
-              style: TextStyle(color: Colors.white, fontSize: 12.0),
+                          fireList.fireData!.time! * 1000))}. Buka peta untuk mengetahui lokasi!",
+              style: const TextStyle(color: Colors.white, fontSize: 12.0),
             ),
-            SizedBox(
+            const SizedBox(
               height: 12.0,
             ),
             Row(
@@ -172,12 +168,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               ? Colors.red[700]
                               : Colors.amber,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8.0,
                         ),
                         Text(
                           fireList.fireData!.desc!,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         )
                       ],
@@ -191,10 +187,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 35.0,
                       child: ElevatedButton(
                           onPressed: () => {},
-                          child: Text(
-                            "Selesai",
-                            style: TextStyle(color: Colors.white, fontSize: 12),
-                          ),
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green[700]),
@@ -202,9 +194,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(2),
-                              )))),
+                              ))),
+                          child: const Text(
+                            "Selesai",
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          )),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10.0,
                     ),
                     SizedBox(
@@ -216,18 +212,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                     double.parse("${fireList.fireData!.lat}"),
                                     double.parse("${fireList.fireData!.lon}"))
                               },
-                          child: Text(
-                            "Lokasi",
-                            style: TextStyle(
-                                color: Color.fromRGBO(173, 6, 6, 1),
-                                fontSize: 12),
-                          ),
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(2),
-                          )))),
+                          ))),
+                          child: const Text(
+                            "Lokasi",
+                            style: TextStyle(
+                                color: Color.fromRGBO(173, 6, 6, 1),
+                                fontSize: 12),
+                          )),
                     ),
                   ],
                 )

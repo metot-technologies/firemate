@@ -15,7 +15,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           boxShadow: <BoxShadow>[
             BoxShadow(
               color: Color.fromRGBO(0, 0, 0, 0.2),
@@ -24,9 +24,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ],
         ),
         child: NavigationBar(
-            shadowColor: Color.fromRGBO(0, 0, 0, 0.2),
+            shadowColor: const Color.fromRGBO(0, 0, 0, 0.2),
             backgroundColor: Colors.white,
-            indicatorColor: Color.fromRGBO(173, 6, 6, 1),
+            indicatorColor: const Color.fromRGBO(173, 6, 6, 1),
             onDestinationSelected: (int index) {
               setState(() {
                 currentPageIndex = index;
