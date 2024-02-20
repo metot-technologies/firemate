@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firemate/firebase_options.dart';
 import 'package:firemate/screens/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,24 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+      channelGroupKey: "basic_channel_group",
+      channelKey: "basic_channel",
+      channelName: "Basic Notification",
+      channelDescription: "Basic notifications channel",
+    )
+  ], channelGroups: [
+    NotificationChannelGroup(
+      channelGroupKey: "basic_channel_group",
+      channelGroupName: "Basic Group",
+    )
+  ]);
+  bool isAllowedToSendNotification =
+  await AwesomeNotifications().isNotificationAllowed();
+  if (!isAllowedToSendNotification) {
+    AwesomeNotifications().requestPermissionToSendNotifications();
+  }
   runApp(const MainApp());
 }
 
