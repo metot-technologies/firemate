@@ -4,6 +4,7 @@ import 'package:firemate/model/data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../controllers/notification_controller.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -143,7 +144,16 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 12.0,
             ),
             Text(
-              "Terjadi kebakaran pada 13:00 WITA, 12 Januari 2024. Buka peta untuk mengetahui lokasi!",
+              "Terjadi kebakaran pada " +
+                  DateFormat().add_Hm().format(
+                      DateTime.fromMillisecondsSinceEpoch(
+                              fireList.fireData!.time! * 1000)
+                          .toUtc()) +
+                  " WITA, " +
+                  DateFormat().add_yMMMMd().format(
+                      DateTime.fromMillisecondsSinceEpoch(
+                          fireList.fireData!.time! * 1000)) +
+                  ". Buka peta untuk mengetahui lokasi!",
               style: TextStyle(color: Colors.white, fontSize: 12.0),
             ),
             SizedBox(
@@ -201,7 +211,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 90.0,
                       height: 35.0,
                       child: ElevatedButton(
-                          onPressed: () => {navigateTo(-8.68967, 115.23786)},
+                          onPressed: () => {
+                                navigateTo(
+                                    double.parse("${fireList.fireData!.lat}"),
+                                    double.parse("${fireList.fireData!.lon}"))
+                              },
                           child: Text(
                             "Lokasi",
                             style: TextStyle(
