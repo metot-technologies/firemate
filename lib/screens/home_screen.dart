@@ -31,11 +31,13 @@ class _HomeScreenState extends State<HomeScreen> {
           decoration: BoxDecoration(
               color: const Color.fromRGBO(242, 244, 255, 1),
               borderRadius: BorderRadius.circular(16)),
-          child: Column(
-            children: [
-              for (int i = 0; i < fireList.length; i++) 
-                  WarningCard(fireList[i])
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                for (int i = 0; i < fireList.length; i++) 
+                    WarningCard(fireList[i])
+              ],
+            ),
           )),
       body: Container(
         width: MediaQuery.sizeOf(context).width,

@@ -10,7 +10,7 @@ class FireData {
   bool? is_done;
   String? lat;
   String? lon;
-  String? time;
+  int? time;
 
   FireData({this.desc, this.is_done, this.lat, this.lon, this.time});
 
