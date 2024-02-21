@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Widget WarningCard(Fire fireList) {
+  Widget WarningCard(Fire fireData) {
     return Card(
       child: Container(
         width: MediaQuery.sizeOf(context).width - 24,
@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 12.0,
             ),
             Text(
-              "Terjadi kebakaran pada ${DateFormat('HH:mm WITA, d MMMM y', 'id_ID').format(DateTime.fromMillisecondsSinceEpoch(fireList.fireData!.time! * 1000).toUtc())}. Buka peta untuk mengetahui lokasi!",
+              "Terjadi kebakaran pada ${DateFormat('HH:mm WITA, d MMMM y', 'id_ID').format(DateTime.fromMillisecondsSinceEpoch(fireData.fireData!.time! * 1000).toUtc())}. Buka peta untuk mengetahui lokasi!",
               style: const TextStyle(color: Colors.white, fontSize: 12.0),
             ),
             const SizedBox(
@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Icon(
                           Icons.local_fire_department_sharp,
-                          color: fireList.fireData!.desc! == "Tinggi"
+                          color: fireData.fireData!.desc! == "Tinggi"
                               ? Colors.red[700]
                               : Colors.amber,
                         ),
@@ -182,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 8.0,
                         ),
                         Text(
-                          fireList.fireData!.desc!,
+                          fireData.fireData!.desc!,
                           style: const TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         )
@@ -199,16 +199,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           onPressed: () => {
                                 dbref
                                     .child("datas")
-                                    .child(fireList.key!)
+                                    .child(fireData.key!)
                                     .update({"is_done": true}).then((value) {
-                                  Navigator.of(context).pop();
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const BottomNavBar()),
-                                  );
-                                  // setState(() {});
+                                  int index = fireList.indexWhere(
+                                      (element) => element.key == fireData.key);
+                                  fireList.removeAt(index);
+                                  setState(() {});
                                 })
                               },
                           style: ButtonStyle(
@@ -233,8 +229,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ElevatedButton(
                           onPressed: () => {
                                 navigateTo(
-                                    double.parse("${fireList.fireData!.lat}"),
-                                    double.parse("${fireList.fireData!.lon}"))
+                                    double.parse("${fireData.fireData!.lat}"),
+                                    double.parse("${fireData.fireData!.lon}"))
                               },
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<

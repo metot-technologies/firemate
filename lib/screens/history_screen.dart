@@ -9,7 +9,6 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
-  int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
