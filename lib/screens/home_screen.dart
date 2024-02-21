@@ -100,18 +100,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void retrieveUpdateFire() {
-    dbref.child("datas").onChildChanged.listen((data) {
-      FireData fireData = FireData.fromJson(data.snapshot.value as Map);
-      if (fireData.is_done == false) {
-        Fire fire = Fire(key: data.snapshot.key, fireData: fireData);
-        fireList.add(fire);
-      }
-      print("Panjang list" + "${fireList.length}");
-      setState(() {});
-    });
-  }
-
   static void navigateTo(double lat, double lon) async {
     var uri = Uri.parse(
         'https://www.google.com/maps/dir/?api=1&destination=$lat,$lon&travelmode=driving');
