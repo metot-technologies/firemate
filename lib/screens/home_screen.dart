@@ -1,6 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firemate/model/data_model.dart';
+import 'package:firemate/screens/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../controllers/notification_controller.dart';
@@ -84,8 +85,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void retrieveFireData() {
     dbref.child("datas").onChildAdded.listen((data) {
       FireData fireData = FireData.fromJson(data.snapshot.value as Map);
-      Fire fire = Fire(key: data.snapshot.key, fireData: fireData);
-      fireList.add(fire);
+      if (fireData.is_done == false) {
+        Fire fire = Fire(key: data.snapshot.key, fireData: fireData);
+        fireList.add(fire);
+      }
       setState(() {
         AwesomeNotifications().createNotification(
             content: NotificationContent(
@@ -94,6 +97,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: "Firemate",
                 body: "TERJADI KEBAKARAN!"));
       });
+    });
+  }
+
+  void retrieveUpdateFire() {
+    dbref.child("datas").onChildChanged.listen((data) {
+      FireData fireData = FireData.fromJson(data.snapshot.value as Map);
+      if (fireData.is_done == false) {
+        Fire fire = Fire(key: data.snapshot.key, fireData: fireData);
+        fireList.add(fire);
+      }
+      print("Panjang list" + "${fireList.length}");
+      setState(() {});
     });
   }
 
@@ -144,10 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 12.0,
             ),
             Text(
-              "Terjadi kebakaran pada ${DateFormat('HH:mm WITA, d MMMM y', 'id_ID').format(
-                      DateTime.fromMillisecondsSinceEpoch(
-                              fireList.fireData!.time! * 1000)
-                          .toUtc())}. Buka peta untuk mengetahui lokasi!",
+              "Terjadi kebakaran pada ${DateFormat('HH:mm WITA, d MMMM y', 'id_ID').format(DateTime.fromMillisecondsSinceEpoch(fireList.fireData!.time! * 1000).toUtc())}. Buka peta untuk mengetahui lokasi!",
               style: const TextStyle(color: Colors.white, fontSize: 12.0),
             ),
             const SizedBox(
@@ -184,7 +196,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 90.0,
                       height: 35.0,
                       child: ElevatedButton(
-                          onPressed: () => {},
+                          onPressed: () => {
+                                dbref
+                                    .child("datas")
+                                    .child(fireList.key!)
+                                    .update({"is_done": true}).then((value) {
+                                  Navigator.of(context).pop();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const BottomNavBar()),
+                                  );
+                                  // setState(() {});
+                                })
+                              },
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green[700]),
