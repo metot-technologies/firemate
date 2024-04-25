@@ -49,17 +49,18 @@ class DefaultFirebaseOptions {
     messagingSenderId: '446733698449',
     projectId: 'esp8266-f20ed',
     authDomain: 'esp8266-f20ed.firebaseapp.com',
-    databaseURL: 'https://esp8266-f20ed-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://esp8266-f20ed-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'esp8266-f20ed.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyALUGhM7MPnqTuIJZXWHpMXrK_84ihJrfU',
-    appId: '1:446733698449:android:9d0cf779d25db62a054630',
-    messagingSenderId: '446733698449',
-    projectId: 'esp8266-f20ed',
-    databaseURL: 'https://esp8266-f20ed-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'esp8266-f20ed.appspot.com',
+    apiKey: 'AIzaSyD5prAj-bUiBKR6mMWvy8gGh1zVFrPkFdA',
+    appId: '1:722455357853:android:608ad3d27f97762fb86774',
+    messagingSenderId: '722455357853',
+    projectId: 'firemate-420600',
+    databaseURL: 'https://firemate-420600-default-rtdb.firebaseio.com',
+    storageBucket: 'firemate-420600.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -67,7 +68,8 @@ class DefaultFirebaseOptions {
     appId: '1:446733698449:ios:becfd4f7f0d5d1f2054630',
     messagingSenderId: '446733698449',
     projectId: 'esp8266-f20ed',
-    databaseURL: 'https://esp8266-f20ed-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://esp8266-f20ed-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'esp8266-f20ed.appspot.com',
     iosBundleId: 'com.example.firemate',
   );
@@ -77,7 +79,8 @@ class DefaultFirebaseOptions {
     appId: '1:446733698449:ios:383c812f83377d58054630',
     messagingSenderId: '446733698449',
     projectId: 'esp8266-f20ed',
-    databaseURL: 'https://esp8266-f20ed-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://esp8266-f20ed-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'esp8266-f20ed.appspot.com',
     iosBundleId: 'com.example.firemate.RunnerTests',
   );
