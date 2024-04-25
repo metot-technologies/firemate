@@ -120,7 +120,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
             const SizedBox(height: 10),
             Text(
-              "${DateFormat('HH:mm WITA, d MMMM y', 'id_ID').format(DateTime.fromMillisecondsSinceEpoch(historyData.fireData!.time! * 1000).toUtc())}",
+              "tes",
               style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 10),

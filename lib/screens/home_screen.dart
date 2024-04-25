@@ -82,12 +82,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void retrieveFireData() {
-    dbref.child("datas").onChildAdded.listen((data) {
+    dbref.child("datas/").onChildAdded.listen((data) {
       FireData fireData = FireData.fromJson(data.snapshot.value as Map);
       if (fireData.is_done == false) {
         Fire fire = Fire(key: data.snapshot.key, fireData: fireData);
         fireList.add(fire);
+        print("ditambahkan");
       }
+
+      print(data.snapshot.value);
       setState(() {
         AwesomeNotifications().createNotification(
             content: NotificationContent(
@@ -122,6 +125,8 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
+              height: 100.0,
+              width: 100.0,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(fireData.fireData!.image_url!))),
@@ -151,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 12.0,
             ),
             Text(
-              "Terjadi kebakaran pada ${DateFormat('HH:mm WITA, d MMMM y', 'id_ID').format(DateTime.fromMillisecondsSinceEpoch(fireData.fireData!.time! * 1000).toUtc())}. Buka peta untuk mengetahui lokasi!",
+              "tes",
               style: const TextStyle(color: Colors.white, fontSize: 12.0),
             ),
             const SizedBox(
