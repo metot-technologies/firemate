@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firemate/model/data_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -92,6 +93,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
   }
 
   Widget HistoryCard(Fire historyData) {
+    final int timestamp = int.parse(historyData.fireData!.time!);
+    final dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+
+    final formattedDateTime = DateFormat.yMMMMd('id_ID').format(dateTime);
+    final formattedHour = DateFormat.Hm().format(dateTime);
     return Card(
       surfaceTintColor: Colors.white,
       child: Container(
@@ -119,7 +125,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
             const SizedBox(height: 10),
             Text(
-              "tes",
+              "Terjadi kebakaran pada $formattedHour WITA, $formattedDateTime.",
               style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 10),
