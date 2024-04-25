@@ -87,10 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (fireData.is_done == false) {
         Fire fire = Fire(key: data.snapshot.key, fireData: fireData);
         fireList.add(fire);
-        print("ditambahkan");
       }
-
-      print(data.snapshot.value);
       setState(() {
         AwesomeNotifications().createNotification(
             content: NotificationContent(
@@ -113,141 +110,182 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget WarningCard(Fire fireData) {
+    final int timestamp = int.parse(fireData.fireData!.time!);
+    final dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+
+    final formattedDateTime = DateFormat.yMMMMd('id_ID').format(dateTime);
+    final formattedHour = DateFormat.Hm().format(dateTime);
+
     return Card(
-      child: Container(
-        width: MediaQuery.sizeOf(context).width - 24,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
-            image: const DecorationImage(
-                image: AssetImage('assets/card_bg.png'), fit: BoxFit.fill)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
+      child: Column(
+        children: [
+          Container(
+              width: MediaQuery.sizeOf(context).width - 24,
               height: 100.0,
-              width: 100.0,
               decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      topRight: Radius.circular(8)),
                   image: DecorationImage(
-                      image: NetworkImage(fireData.fireData!.image_url!))),
-            ),
-            const Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: [
-                    Image(image: AssetImage('assets/bell.png')),
-                    SizedBox(width: 16.0),
-                    Text("Kebakaran!",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0))
-                  ],
+                      image: NetworkImage(
+                        fireData.fireData!.image_url!,
+                      ),
+                      fit: BoxFit.cover)),
+              child: Container(
+                width: MediaQuery.sizeOf(context).width - 24,
+                height: 100.0,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(104, 0, 0, 0),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      topRight: Radius.circular(8)),
                 ),
-                Icon(
-                  Icons.more_vert_rounded,
-                  color: Colors.white,
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
-            Text(
-              "tes",
-              style: const TextStyle(color: Colors.white, fontSize: 12.0),
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Center(
+                    child: Text(
+                  "klik untuk melihat gambar lebih jelas",
+                  style: TextStyle(
+                      color: const Color.fromARGB(148, 255, 255, 255),
+                      fontSize: 12.0),
+                )),
+              )),
+          Container(
+            width: MediaQuery.sizeOf(context).width - 24,
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(8.0),
+                    bottomRight: Radius.circular(8)),
+                image: const DecorationImage(
+                    image: AssetImage('assets/card_bg.png'), fit: BoxFit.fill)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  children: [
+                const Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
                     Row(
                       children: [
-                        Icon(
-                          Icons.local_fire_department_sharp,
-                          color: fireData.fireData!.desc! == "Tinggi"
-                              ? Colors.red[700]
-                              : Colors.amber,
-                        ),
-                        const SizedBox(
-                          width: 8.0,
-                        ),
-                        Text(
-                          fireData.fireData!.desc!,
-                          style: const TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        )
+                        Image(image: AssetImage('assets/bell.png')),
+                        SizedBox(width: 16.0),
+                        Text("Kebakaran!",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0))
                       ],
+                    ),
+                    Icon(
+                      Icons.more_vert_rounded,
+                      color: Colors.white,
                     )
                   ],
                 ),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                Text(
+                  "Terjadi kebakaran pada $formattedHour WITA, $formattedDateTime. Buka peta untuk mengetahui lokasi!",
+                  style: const TextStyle(color: Colors.white, fontSize: 12.0),
+                ),
+                const SizedBox(
+                  height: 12.0,
+                ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: 90.0,
-                      height: 35.0,
-                      child: ElevatedButton(
-                          onPressed: () => {
-                                dbref
-                                    .child("datas")
-                                    .child(fireData.key!)
-                                    .update({"is_done": true}).then((value) {
-                                  int index = fireList.indexWhere(
-                                      (element) => element.key == fireData.key);
-                                  fireList.removeAt(index);
-                                  setState(() {});
-                                })
-                              },
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.green[700]),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.local_fire_department_sharp,
+                              color: fireData.fireData!.desc! == "Tinggi"
+                                  ? Colors.red[700]
+                                  : Colors.amber,
+                            ),
+                            const SizedBox(
+                              width: 8.0,
+                            ),
+                            Text(
+                              fireData.fireData!.desc!,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 90.0,
+                          height: 35.0,
+                          child: ElevatedButton(
+                              onPressed: () => {
+                                    dbref
+                                        .child("datas")
+                                        .child(fireData.key!)
+                                        .update({"is_done": true}).then(
+                                            (value) {
+                                      int index = fireList.indexWhere(
+                                          (element) =>
+                                              element.key == fireData.key);
+                                      fireList.removeAt(index);
+                                      setState(() {});
+                                    })
+                                  },
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.green[700]),
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(2),
+                                  ))),
+                              child: const Text(
+                                "Selesai",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              )),
+                        ),
+                        const SizedBox(
+                          width: 10.0,
+                        ),
+                        SizedBox(
+                          width: 90.0,
+                          height: 35.0,
+                          child: ElevatedButton(
+                              onPressed: () => {
+                                    navigateTo(
+                                        double.parse(
+                                            "${fireData.fireData!.lat}"),
+                                        double.parse(
+                                            "${fireData.fireData!.lon}"))
+                                  },
+                              style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(2),
                               ))),
-                          child: const Text(
-                            "Selesai",
-                            style: TextStyle(color: Colors.white, fontSize: 12),
-                          )),
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    SizedBox(
-                      width: 90.0,
-                      height: 35.0,
-                      child: ElevatedButton(
-                          onPressed: () => {
-                                navigateTo(
-                                    double.parse("${fireData.fireData!.lat}"),
-                                    double.parse("${fireData.fireData!.lon}"))
-                              },
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(2),
-                          ))),
-                          child: const Text(
-                            "Lokasi",
-                            style: TextStyle(
-                                color: Color.fromRGBO(173, 6, 6, 1),
-                                fontSize: 12),
-                          )),
-                    ),
+                              child: const Text(
+                                "Lokasi",
+                                style: TextStyle(
+                                    color: Color.fromRGBO(173, 6, 6, 1),
+                                    fontSize: 12),
+                              )),
+                        ),
+                      ],
+                    )
                   ],
                 )
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
