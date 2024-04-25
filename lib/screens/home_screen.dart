@@ -121,6 +121,11 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(fireData.fireData!.image_url!))),
+            ),
             const Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
