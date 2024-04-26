@@ -94,10 +94,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   Widget HistoryCard(Fire historyData) {
     final int timestamp = int.parse(historyData.fireData!.time!);
-    final dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+
+    final dateTime =
+        DateTime.fromMillisecondsSinceEpoch(timestamp * 1000).toUtc();
 
     final formattedDateTime = DateFormat.yMMMMd('id_ID').format(dateTime);
+
     final formattedHour = DateFormat.Hm().format(dateTime);
+
     return Card(
       surfaceTintColor: Colors.white,
       child: Container(

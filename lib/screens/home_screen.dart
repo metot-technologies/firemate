@@ -112,9 +112,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget WarningCard(Fire fireData) {
     final int timestamp = int.parse(fireData.fireData!.time!);
-    final dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+
+    final dateTime =
+        DateTime.fromMillisecondsSinceEpoch(timestamp * 1000).toUtc();
 
     final formattedDateTime = DateFormat.yMMMMd('id_ID').format(dateTime);
+
     final formattedHour = DateFormat.Hm().format(dateTime);
 
     return Card(
