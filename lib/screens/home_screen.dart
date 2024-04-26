@@ -1,4 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firemate/model/data_model.dart';
 import 'package:flutter/material.dart';
@@ -224,19 +225,41 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 90.0,
                           height: 35.0,
                           child: ElevatedButton(
-                              onPressed: () => {
-                                    dbref
-                                        .child("datas")
-                                        .child(fireData.key!)
-                                        .update({"is_done": true}).then(
-                                            (value) {
-                                      int index = fireList.indexWhere(
-                                          (element) =>
-                                              element.key == fireData.key);
-                                      fireList.removeAt(index);
-                                      setState(() {});
-                                    })
-                                  },
+                              onPressed: () async {
+                                if (await confirm(
+                                  context,
+                                  title: const Text('Konfirmasi Status'),
+                                  content: const Text(
+                                      'tekan selesai untuk menyelesaikan kasus'),
+                                  textOK: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8.0, horizontal: 20.0),
+                                    decoration: BoxDecoration(
+                                        color: Colors.green[700],
+                                        borderRadius:
+                                            BorderRadius.circular(2.0)),
+                                    child: Text(
+                                      'selesai',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  textCancel: Text(
+                                    'batal',
+                                    style: TextStyle(color: Colors.red[900]),
+                                  ),
+                                )) {
+                                  dbref
+                                      .child("datas")
+                                      .child(fireData.key!)
+                                      .update({"is_done": true}).then((value) {
+                                    int index = fireList.indexWhere((element) =>
+                                        element.key == fireData.key);
+                                    fireList.removeAt(index);
+                                    setState(() {});
+                                  });
+                                }
+                                return;
+                              },
                               style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
                                       Colors.green[700]),

@@ -12,16 +12,9 @@ class FireData {
   String? lon;
   String? time;
   String? image_url;
-  String? filler;
 
   FireData(
-      {this.desc,
-      this.is_done,
-      this.lat,
-      this.lon,
-      this.time,
-      this.image_url,
-      this.filler});
+      {this.desc, this.is_done, this.lat, this.lon, this.time, this.image_url});
 
   FireData.fromJson(Map<dynamic, dynamic> json) {
     desc = json["desc"];
@@ -30,6 +23,5 @@ class FireData {
     lon = json["lon"];
     time = json["time"];
     image_url = json["image_url"];
-    filler = json["filler"] ?? 0;
   }
 }
