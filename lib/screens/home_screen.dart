@@ -120,35 +120,79 @@ class _HomeScreenState extends State<HomeScreen> {
     return Card(
       child: Column(
         children: [
-          Container(
-              width: MediaQuery.sizeOf(context).width - 24,
-              height: 100.0,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8.0),
-                      topRight: Radius.circular(8)),
-                  image: DecorationImage(
-                      image: NetworkImage(
-                        fireData.fireData!.image_url!,
-                      ),
-                      fit: BoxFit.cover)),
-              child: Container(
+          TextButton(
+            style: TextButton.styleFrom(
+                padding: EdgeInsets.zero, backgroundColor: Colors.white),
+            onPressed: () => showDialog(
+              barrierColor: Color.fromARGB(206, 0, 0, 0),
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                contentPadding: EdgeInsets.all(0),
+                surfaceTintColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: 180.0,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                fireData.fireData!.image_url!,
+                              ),
+                              fit: BoxFit.cover)),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                      child: Container(
+                          width: MediaQuery.sizeOf(context).width,
+                          padding: EdgeInsets.symmetric(vertical: 5.0),
+                          decoration: BoxDecoration(color: Colors.white),
+                          child: Center(
+                            child: Text(
+                              "tutup",
+                              style: TextStyle(
+                                  color: const Color.fromARGB(174, 0, 0, 0),
+                                  fontSize: 12.0),
+                            ),
+                          )),
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            child: Container(
                 width: MediaQuery.sizeOf(context).width - 24,
                 height: 100.0,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(104, 0, 0, 0),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8.0),
-                      topRight: Radius.circular(8)),
-                ),
-                child: Center(
-                    child: Text(
-                  "klik untuk melihat gambar lebih jelas",
-                  style: TextStyle(
-                      color: const Color.fromARGB(148, 255, 255, 255),
-                      fontSize: 12.0),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8.0),
+                        topRight: Radius.circular(8)),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          fireData.fireData!.image_url!,
+                        ),
+                        fit: BoxFit.cover)),
+                child: Container(
+                  width: MediaQuery.sizeOf(context).width - 24,
+                  height: 100.0,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(104, 0, 0, 0),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8.0),
+                        topRight: Radius.circular(8)),
+                  ),
+                  child: Center(
+                      child: Text(
+                    "klik untuk melihat gambar lebih jelas",
+                    style: TextStyle(
+                        color: const Color.fromARGB(148, 255, 255, 255),
+                        fontSize: 12.0),
+                  )),
                 )),
-              )),
+          ),
           Container(
             width: MediaQuery.sizeOf(context).width - 24,
             padding:
