@@ -21,14 +21,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    AwesomeNotifications().setListeners(
-        onActionReceivedMethod: NotificationController.onActionReceivedMethod,
-        onNotificationCreatedMethod:
-            NotificationController.onNotificationCreatedMethod,
-        onNotificationDisplayedMethod:
-            NotificationController.onNotificationDisplayedMethod,
-        onDismissActionReceivedMethod:
-            NotificationController.onDismissActionReceivedMethod);
+    // AwesomeNotifications().setListeners(
+    //     onActionReceivedMethod: NotificationController.onActionReceivedMethod,
+    //     onNotificationCreatedMethod:
+    //         NotificationController.onNotificationCreatedMethod,
+    //     onNotificationDisplayedMethod:
+    //         NotificationController.onNotificationDisplayedMethod,
+    //     onDismissActionReceivedMethod:
+    //         NotificationController.onDismissActionReceivedMethod);
     super.initState();
 
     retrieveFireData();
@@ -89,14 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Fire fire = Fire(key: data.snapshot.key, fireData: fireData);
         fireList.add(fire);
       }
-      setState(() {
-        AwesomeNotifications().createNotification(
-            content: NotificationContent(
-                id: 1,
-                channelKey: "basic_channel",
-                title: "Firemate",
-                body: "TERJADI KEBAKARAN!"));
-      });
+      setState(() {});
     });
   }
 
