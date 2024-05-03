@@ -1,7 +1,7 @@
 name: firemate
-description: "A new Flutter project."
+description: "Firemate is a tool to help firefighters to speed up their response."
 publish_to: "none"
-version: 0.1.0
+version: 1.1.0
 
 environment:
   sdk: ">=3.2.0 <4.0.0"
